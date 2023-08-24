@@ -1,4 +1,4 @@
-require('dotenv').config()
+const dotenv = require('dotenv')
 const packageJson = require('../package.json')
 const { Client, MessageMedia, LocalAuth } = require('whatsapp-web.js')
 const express = require('express')
@@ -17,6 +17,9 @@ const io = socketIO(server)
 const winston = require('winston')
 require('winston-daily-rotate-file')
 const { combine, timestamp, json } = winston.format
+
+dotenv.config()
+dotenv.config({ path: '.env.local', override: true })
 
 const fileRotateTransport = new winston.transports.DailyRotateFile({
   filename: './logs/wpp-%DATE%.log',
