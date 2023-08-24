@@ -87,9 +87,15 @@ io.on('connection', function (socket) {
     })
   })
 
+  client.on('loading_screen', (percent, message) => {
+    socket.emit(`LOADING SCREEN, ${percent}% - ${message}`)
+    logger.info(`LOADING SCREEN, ${percent}% - ${message}`)
+  })
+
   client.on('ready', () => {
     socket.emit('ready', 'Whatsapp is ready!')
     socket.emit('message', 'Whatsapp is ready!')
+    logger.info('READY')
   })
 
   client.on('authenticated', () => {
@@ -100,10 +106,12 @@ io.on('connection', function (socket) {
 
   client.on('auth_failure', function (session) {
     socket.emit('message', 'Auth failure, restarting...')
+    logger.error('AUTHENTICATION FAILURE', session)
   })
 
   client.on('disconnected', (reason) => {
     socket.emit('message', 'Whatsapp is disconnected!')
+    logger.warn('DISCONNECTED', reason)
     client.destroy()
     client.initialize()
   })
