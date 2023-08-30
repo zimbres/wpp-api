@@ -1,6 +1,6 @@
 {
   "name": "wpp-api",
-  "version": "3.0.8",
+  "version": "3.0.9",
   "description": "WPP Api",
   "main": "index.js",
   "scripts": {
@@ -15,20 +15,21 @@
   "author": "Marcio",
   "license": "MIT",
   "dependencies": {
-    "axios": "^1.2.1",
-    "dotenv": "^16.0.2",
-    "express": "^4.17.1",
-    "express-fileupload": "^1.2.0",
-    "express-validator": "^6.9.2",
-    "http": "0.0.1-security",
-    "mime-types": "^2.1.32",
-    "qrcode": "^1.4.4",
-    "socket.io": "^4.5.2",
-    "whatsapp-web.js": "^1.21.1",
-    "winston": "^3.8.2",
+    "axios": "^1.5.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "express-validator": "^7.0.1",
+    "mime-types": "^2.1.35",
+    "qrcode": "^1.5.3",
+    "socket.io": "^4.7.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
+    "whatsapp-web.js": "^1.22.1",
+    "winston": "^3.10.0",
     "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemon": "^3.0.1"
   }
 }
