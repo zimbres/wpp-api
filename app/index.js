@@ -17,6 +17,22 @@ const io = socketIO(server)
 const winston = require('winston')
 require('winston-daily-rotate-file')
 const { combine, timestamp, json } = winston.format
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
+
+const options = {
+  failOnErrors: true, // Whether or not to throw when parsing errors. Defaults to false.
+  definition: {
+    openapi: '3.1.0',
+    info: {
+      title: 'WPP API',
+      version: `${packageJson.version}`,
+    },
+  },
+  apis: ['./app/index.js'],
+};
+const swaggerSpec = swaggerJsdoc(options);
+
 
 dotenv.config()
 dotenv.config({ path: '.env.local', override: true })
@@ -36,11 +52,21 @@ const logger = winston.createLogger({
   ],
 })
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(fileUpload({ debug: false }))
 app.use(express.static(__dirname + '/public'))
 
+/**
+ * @openapi
+ * /:
+ *   get:
+ *     description: Health
+ *     responses:
+ *       200:
+ *         description: Returns api health status.
+ */
 app.get('/', (req, res) => {
   res.json({
     data: {
@@ -143,6 +169,17 @@ app.get('/wpp', (req, res) => {
   })
 })
 
+/**
+ * @openapi
+ * /state:
+ *   get:
+ *     description: State
+ *     responses:
+ *       200:
+ *         description: Returns wpp connection state.
+ *       503:
+ *         description: NotConnected
+ */
 app.get('/state', async (req, res) => {
   const isConnected = await checkIsConnected()
   if (isConnected == 'CONNECTED') {
@@ -155,6 +192,27 @@ app.get('/state', async (req, res) => {
   }
 })
 
+/**
+ * @openapi
+ * /send-message:
+ *   post:
+ *     description: Send Message
+ *     parameters:
+ *       - in: body
+ *         name: body
+ *         description: Message to send
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             number:
+ *               type: string
+ *             message:
+ *               type: string
+ *     responses:
+ *       200:
+ *         description: Response.
+ */
 app.post('/send-message', [body('number').notEmpty(), body('message').notEmpty(),], async (req, res) => {
   const errors = validationResult(req).formatWith(({ msg }) => {
     return msg
