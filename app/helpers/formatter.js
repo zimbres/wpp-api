@@ -9,5 +9,5 @@ const phoneNumberFormatter = function (number) {
 }
 
 module.exports = {
-  phoneNumberFormatter
+  phoneNumberFormatter,
 }
