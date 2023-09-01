@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node app/index.js",
-    "start:dev": "nodemon app/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon app/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npx eslint .",
+    "check": "npx prettier . --check",
+    "write": "npx prettier . --write"
   },
   "keywords": [
     "wpp-api",
@@ -25,7 +28,7 @@
     "socket.io": "^4.7.2",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
-    "whatsapp-web.js": "^1.22.1",
+    "whatsapp-web.js": "^1.22.2-alpha.0",
     "winston": "^3.10.0",
     "winston-daily-rotate-file": "^4.7.1"
   },
