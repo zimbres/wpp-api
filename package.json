@@ -1,6 +1,6 @@
 {
   "name": "wpp-api",
-  "version": "3.0.10",
+  "version": "3.0.11",
   "description": "WPP Api",
   "main": "index.js",
   "scripts": {
