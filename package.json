@@ -1,6 +1,6 @@
 {
   "name": "wpp-api",
-  "version": "3.0.12",
+  "version": "3.0.13",
   "description": "WPP Api",
   "main": "index.js",
   "scripts": {
@@ -28,7 +28,7 @@
     "socket.io": "^4.7.2",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
-    "whatsapp-web.js": "^1.23.1-alpha.5",
+    "whatsapp-web.js": "^1.23.1-alpha.6",
     "winston": "^3.10.0",
     "winston-daily-rotate-file": "^4.7.1"
   },
